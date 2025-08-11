@@ -1,181 +1,148 @@
-import Link from 'next/link';
-import { Play, Heart, BarChart3, Clock } from 'lucide-react';
+'use client';
 
-export default function HomePage() {
+import { useState, useMemo } from 'react';
+import VideoCard from '../components/VideoCard';
+import SearchBar from '../components/SearchBar';
+import FilterChips from '../components/FilterChips';
+import videosData from '@/data/videos.json';
+
+export default function VideosPage() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  // Get all unique tags from videos
+  const availableTags = useMemo(() => {
+    const allTags = videosData.videos.flatMap(video => video.tags);
+    return Array.from(new Set(allTags));
+  }, []);
+
+  // Filter videos based on search and tags
+  const filteredVideos = useMemo(() => {
+    let filtered = videosData.videos;
+
+    // Filter by search query
+    if (searchQuery) {
+      filtered = filtered.filter(video =>
+        video.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        video.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        video.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        video.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
+    }
+
+    // Filter by selected tags
+    if (selectedTags.length > 0 && !selectedTags.includes('All')) {
+      filtered = filtered.filter(video =>
+        selectedTags.some(tag => video.tags.includes(tag))
+      );
+    }
+
+    return filtered;
+  }, [searchQuery, selectedTags]);
+
+  const handleTagToggle = (tag: string) => {
+    if (tag === 'All') {
+      setSelectedTags([]);
+    } else {
+      setSelectedTags(prev =>
+        prev.includes(tag)
+          ? prev.filter(t => t !== tag)
+          : [...prev, tag]
+      );
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
-      {/* Hero Section */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            Reduce Surgery Anxiety
-            <span className="block text-emerald-600 mt-2">
-              Through Understanding
-            </span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Surgical Education Video Library
           </h1>
-          
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Watch gentle, clear explanations of your procedure to feel more prepared and confident about your upcoming surgery.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Browse our collection of patient-friendly videos explaining orthopedic procedures. 
+            Click on any video to watch and learn what to expect during your surgery.
           </p>
-          
-          <Link
-            href="/videos"
-            className="inline-flex items-center gap-3 bg-emerald-600 text-white px-8 py-4 rounded-xl hover:bg-emerald-700 transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
-          >
-            <Play className="w-6 h-6" />
-            Browse Video Library
-          </Link>
         </div>
 
-        {/* Featured Video */}
-        <div className="bg-white rounded-2xl shadow-lg border border-emerald-100 overflow-hidden mb-16">
-          <div className="p-8">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Featured Procedure</h2>
-              <p className="text-gray-600">A simple, common outpatient procedure</p>
+        {/* Search and Filters */}
+        <div className="bg-white rounded-xl shadow-lg border border-emerald-100 p-8 mb-10">
+          <div className="space-y-6">
+            <div className="max-w-md mx-auto">
+              <SearchBar
+                value={searchQuery}
+                onChange={setSearchQuery}
+                placeholder="Search procedures, categories, or keywords..."
+              />
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              {/* Video Preview */}
-              <div className="relative">
-                <Link href="/videos/carpal-tunnel-release" className="group block">
-                  <div className="relative aspect-video bg-gray-100 rounded-xl overflow-hidden">
-                    <img 
-                      src="https://img.youtube.com/vi/zoNedgJrBgg/maxresdefault.jpg"
-                      alt="Carpal Tunnel Release Surgery"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                      <div className="bg-white/90 rounded-full p-4 group-hover:scale-110 transition-transform">
-                        <Play className="w-8 h-8 text-emerald-600" />
-                      </div>
-                    </div>
-                    <div className="absolute bottom-3 right-3 bg-black/80 text-white text-sm px-2 py-1 rounded flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      3:45
-                    </div>
-                  </div>
-                </Link>
-              </div>
-
-              {/* Video Info */}
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Carpal Tunnel Release Surgery</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  Learn how carpal tunnel syndrome is treated through a simple outpatient procedure to relieve nerve pressure. This gentle animation shows exactly what happens during the surgery.
-                </p>
-                
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
-                    <span className="text-gray-700">15-30 minute procedure</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
-                    <span className="text-gray-700">Outpatient surgery - go home same day</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
-                    <span className="text-gray-700">Return to normal activities in 2-6 weeks</span>
-                  </div>
-                </div>
-
-                <Link
-                  href="/videos/carpal-tunnel-release"
-                  className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-semibold"
-                >
-                  Watch full explanation
-                  <Play className="w-4 h-4" />
-                </Link>
-              </div>
+            <div className="flex flex-col items-center space-y-4">
+              <h3 className="text-lg font-semibold text-gray-700">Filter by procedure type:</h3>
+              <FilterChips
+                selectedTags={selectedTags}
+                onTagToggle={handleTagToggle}
+                availableTags={availableTags}
+              />
             </div>
           </div>
         </div>
 
-        {/* Dual Purpose Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* For Patients */}
-          <div className="bg-white rounded-xl p-8 shadow-sm border border-emerald-100">
-            <div className="text-center mb-6">
-              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-6 h-6 text-emerald-600" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900">For Patients</h3>
-            </div>
-            
-            <div className="space-y-4">
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Reduce Pre-Surgery Anxiety</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Seeing what actually happens during your procedure helps calm nerves and reduces fear of the unknown.
-                </p>
-              </div>
-              
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Feel More Prepared</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Understanding each step helps you know exactly what to expect before, during, and after surgery.
-                </p>
-              </div>
-              
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Better Recovery</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Educated patients often follow instructions better and have smoother recovery experiences.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* For Doctors */}
-          <div className="bg-white rounded-xl p-8 shadow-sm border border-orange-100">
-            <div className="text-center mb-6">
-              <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <BarChart3 className="w-6 h-6 text-orange-600" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900">For Doctors</h3>
-            </div>
-            
-            <div className="space-y-4">
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Measure Patient Outcomes</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Track how patient education affects anxiety levels, recovery times, and satisfaction scores.
-                </p>
-              </div>
-              
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Improve Care Quality</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Evidence shows educated patients have better surgical experiences and outcomes.
-                </p>
-              </div>
-              
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Generate Research Data</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Collect valuable data on the impact of patient education on surgical care.
-                </p>
-              </div>
-            </div>
-          </div>
+        {/* Results count */}
+        <div className="mb-8">
+          <p className="text-lg text-gray-600">
+            Showing <span className="font-semibold text-emerald-600">{filteredVideos.length}</span> of <span className="font-semibold">{videosData.videos.length}</span> videos
+            {searchQuery && (
+              <span> for &ldquo;<span className="font-semibold text-emerald-600">{searchQuery}</span>&rdquo;</span>
+            )}
+            {selectedTags.length > 0 && !selectedTags.includes('All') && (
+              <span> with tags: <span className="font-semibold text-emerald-600">{selectedTags.join(', ')}</span></span>
+            )}
+          </p>
         </div>
 
-        {/* Simple CTA */}
-        <div className="text-center mt-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Ready to Learn About Your Procedure?
+        {/* Videos Grid */}
+        {filteredVideos.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredVideos.map((video) => (
+              <VideoCard key={video.id} video={video} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16">
+            <div className="max-w-md mx-auto">
+              <p className="text-gray-500 text-xl mb-6">No videos found matching your criteria.</p>
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedTags([]);
+                }}
+                className="bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition-colors font-medium"
+              >
+                Clear all filters
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Categories Overview */}
+        <div className="mt-16 bg-white rounded-xl p-8 border border-emerald-100">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+            Available Procedure Categories
           </h2>
-          <p className="text-gray-600 mb-6">
-            Browse our collection of patient-friendly surgical education videos
-          </p>
-          <Link
-            href="/videos"
-            className="inline-flex items-center gap-3 bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition-colors font-semibold"
-          >
-            <Play className="w-5 h-5" />
-            View All Procedures
-          </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Array.from(new Set(videosData.videos.map(v => v.category))).map((category, index) => {
+              const count = videosData.videos.filter(v => v.category === category).length;
+              return (
+                <div key={index} className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg">
+                  <span className="font-medium text-gray-700">{category}</span>
+                  <span className="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full text-sm font-medium">
+                    {count} video{count !== 1 ? 's' : ''}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

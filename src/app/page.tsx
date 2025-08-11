@@ -41,7 +41,7 @@ export default function HomePage() {
                 <Link href="/videos/carpal-tunnel-release" className="group block">
                   <div className="relative aspect-video bg-gray-100 rounded-xl overflow-hidden">
                     <img 
-                      src="https://img.youtube.com/vi/nRP-TcwfLxQ/maxresdefault.jpg"
+                      src="https://img.youtube.com/vi/zoNedgJrBgg/maxresdefault.jpg"
                       alt="Carpal Tunnel Release Surgery"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
