@@ -1,0 +1,118 @@
+{
+  "videos": [
+    {
+      "id": "knee-replacement",
+      "title": "Total Knee Replacement Surgery",
+      "description": "A gentle, animated explanation of knee replacement surgery showing what happens during the procedure.",
+      "youtubeId": "KOzX2oijysk",
+      "thumbnailUrl": "/thumbnails/knee-replacement.jpg",
+      "duration": "4:32",
+      "tags": ["Animated", "Short", "Joint Replacement"],
+      "summary": "This animation shows how a damaged knee joint is carefully replaced with a prosthetic implant. The procedure typically takes 1-2 hours and is performed under general anesthesia to restore mobility and reduce pain.",
+      "whatToExpect": [
+        "You'll arrive 2 hours before surgery for preparation and IV placement",
+        "The surgery takes 1-2 hours under general anesthesia",
+        "You'll wake up in recovery with your knee bandaged and elevated",
+        "Physical therapy starts within 24 hours to begin movement",
+        "Most patients go home after 1-3 days with walking aids",
+        "Full recovery takes 3-6 months with consistent physical therapy"
+      ],
+      "category": "Joint Replacement"
+    },
+    {
+      "id": "hip-replacement",
+      "title": "Hip Replacement Surgery Explained",
+      "description": "A clear, step-by-step animation of hip replacement surgery and recovery process.",
+      "youtubeId": "8lsP17ECG5Y",
+      "thumbnailUrl": "/thumbnails/hip-replacement.jpg",
+      "duration": "3:21",
+      "tags": ["Animated", "Short", "Joint Replacement"],
+      "summary": "Hip replacement surgery replaces a damaged hip joint with artificial components made of metal, ceramic, or plastic materials. This procedure helps restore mobility and eliminate chronic hip pain.",
+      "whatToExpect": [
+        "Pre-surgery preparation includes medical clearance and planning",
+        "Surgery typically takes 1-2 hours under general anesthesia",
+        "You'll begin moving and walking within hours after surgery",
+        "Hospital stay is usually 1-4 days depending on recovery",
+        "Physical therapy starts immediately and continues for months",
+        "Most people return to normal activities in 6-12 weeks"
+      ],
+      "category": "Joint Replacement"
+    },
+    {
+      "id": "meniscus-repair",
+      "title": "Meniscus Repair Surgery",
+      "description": "Learn how torn meniscus cartilage in the knee is surgically repaired using arthroscopic techniques.",
+      "youtubeId": "W6SRMyHP2EY",
+      "thumbnailUrl": "/thumbnails/meniscus-repair.jpg",
+      "duration": "4:45",
+      "tags": ["Detailed", "Minimally Invasive", "Arthroscopy"],
+      "summary": "Meniscus repair surgery uses arthroscopic techniques to repair or remove torn cartilage in the knee. This minimally invasive procedure helps restore knee function and prevent future arthritis.",
+      "whatToExpect": [
+        "Surgery is done arthroscopically through small incisions",
+        "A tiny camera and instruments are inserted into the knee",
+        "Torn meniscus is either repaired with sutures or trimmed",
+        "Procedure typically takes 30-60 minutes as outpatient surgery",
+        "You'll use crutches for a few days to weeks",
+        "Most people return to normal activities in 4-6 weeks"
+      ],
+      "category": "Sports Medicine"
+    },
+    {
+      "id": "acl-reconstruction",
+      "title": "ACL Reconstruction Surgery",
+      "description": "Understanding ACL tears and how they're surgically repaired to restore knee stability.",
+      "youtubeId": "zmcvRpfxSYc",
+      "thumbnailUrl": "/thumbnails/acl-reconstruction.jpg",
+      "duration": "6:42",
+      "tags": ["Detailed", "Sports Medicine", "Arthroscopy"],
+      "summary": "ACL reconstruction rebuilds the torn anterior cruciate ligament using a graft from your own tissue or donor tissue. This arthroscopic procedure restores knee stability for active lifestyles.",
+      "whatToExpect": [
+        "Surgery is done arthroscopically through small incisions",
+        "A tendon graft replaces the torn ACL ligament",
+        "Procedure takes 1-2 hours under general anesthesia",
+        "You'll go home the same day or after overnight stay",
+        "Physical therapy is crucial and starts within days",
+        "Return to sports typically takes 6-9 months with proper rehab"
+      ],
+      "category": "Sports Medicine"
+    },
+    {
+      "id": "carpal-tunnel-release",
+      "title": "Carpal Tunnel Release Surgery",
+      "description": "Learn how carpal tunnel syndrome is treated through a simple outpatient procedure to relieve nerve pressure.",
+      "youtubeId": "nRP-TcwfLxQ",
+      "thumbnailUrl": "/thumbnails/carpal-tunnel.jpg",
+      "duration": "3:45",
+      "tags": ["Short", "Minimally Invasive", "Outpatient"],
+      "summary": "Carpal tunnel release surgery cuts the ligament that is pressing on the median nerve in your wrist. This outpatient procedure relieves numbness, tingling, and pain in your hand and fingers.",
+      "whatToExpect": [
+        "Procedure is done as outpatient surgery with local anesthesia",
+        "Small incision is made in your palm or wrist",
+        "The transverse carpal ligament is carefully cut to release pressure",
+        "Surgery takes 15-30 minutes and you go home the same day",
+        "Your hand will be bandaged for about a week",
+        "Most people return to normal activities within 2-6 weeks"
+      ],
+      "category": "Hand & Wrist"
+    },
+    {
+      "id": "spinal-fusion",
+      "title": "Lumbar Spinal Fusion Explained",
+      "description": "A detailed look at spinal fusion surgery for treating back pain and spinal instability.",
+      "youtubeId": "T-gNSbddyzs",
+      "thumbnailUrl": "/thumbnails/spinal-fusion.jpg",
+      "duration": "7:28",
+      "tags": ["Detailed", "Complex", "Inpatient"],
+      "summary": "Spinal fusion permanently connects two or more vertebrae to eliminate painful motion and provide stability. Bone grafts and metal hardware help the vertebrae heal together as one solid bone.",
+      "whatToExpect": [
+        "Surgery can take 2-6 hours depending on complexity",
+        "May be done through the back, side, or front approach",
+        "Hospital stay is typically 2-5 days for monitoring",
+        "Walking begins within 24-48 hours with assistance",
+        "Bone fusion takes 3-6 months to become solid",
+        "Full recovery and return to activities takes 6-12 months"
+      ],
+      "category": "Spine Surgery"
+    }
+  ]
+}
