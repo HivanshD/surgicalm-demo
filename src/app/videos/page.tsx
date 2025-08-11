@@ -4,7 +4,6 @@ import { useState, useMemo } from 'react';
 import VideoCard from '../components/VideoCard';
 import SearchBar from '../components/SearchBar';
 import FilterChips from '../components/FilterChips';
-import { Video } from '@/types';
 import videosData from '@/data/videos.json';
 
 export default function VideosPage() {
@@ -94,7 +93,7 @@ export default function VideosPage() {
           <p className="text-lg text-gray-600">
             Showing <span className="font-semibold text-emerald-600">{filteredVideos.length}</span> of <span className="font-semibold">{videosData.videos.length}</span> videos
             {searchQuery && (
-              <span> for "<span className="font-semibold text-emerald-600">{searchQuery}</span>"</span>
+              <span> for &ldquo;<span className="font-semibold text-emerald-600">{searchQuery}</span>&rdquo;</span>
             )}
             {selectedTags.length > 0 && !selectedTags.includes('All') && (
               <span> with tags: <span className="font-semibold text-emerald-600">{selectedTags.join(', ')}</span></span>

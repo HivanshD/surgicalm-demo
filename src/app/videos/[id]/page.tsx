@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { ArrowLeft, Clock, CheckCircle, Heart } from 'lucide-react';
 import VideoPlayer from '../../components/VideoPlayer';
-import { Video } from '@/types';
 import videosData from '@/data/videos.json';
 import { notFound } from 'next/navigation';
 
@@ -99,7 +98,7 @@ export default function VideoDetailPage({ params }: VideoDetailPageProps) {
                 <h4 className="font-semibold text-green-800">Remember</h4>
               </div>
               <p className="text-green-700 text-sm leading-relaxed">
-                It's completely normal to feel nervous about surgery. Watching this video as many times 
+                It&apos;s completely normal to feel nervous about surgery. Watching this video as many times 
                 as you need can help you feel more prepared and calm. Your surgical team is experienced 
                 and will take excellent care of you.
               </p>
@@ -113,38 +112,6 @@ export default function VideoDetailPage({ params }: VideoDetailPageProps) {
                 details specific to your situation during your consultation.
               </p>
             </div>
-          </div>
-        </div>
-
-        {/* Related videos */}
-        <div className="mt-12">
-          <h3 className="text-xl font-semibold text-gray-900 mb-6">Other Procedures You Might Find Helpful</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {videosData.videos
-              .filter(v => v.id !== video.id && (
-                v.category === video.category || 
-                v.tags.some(tag => video.tags.includes(tag))
-              ))
-              .slice(0, 3)
-              .map((relatedVideo) => (
-                <Link key={relatedVideo.id} href={`/videos/${relatedVideo.id}`}>
-                  <div className="bg-white rounded-lg shadow-sm border hover:shadow-md hover:border-blue-200 transition-all duration-200 overflow-hidden group">
-                    <div className="aspect-video bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center group-hover:from-blue-200 group-hover:to-blue-300 transition-colors">
-                      <div className="text-center">
-                        <div className="w-12 h-12 bg-white bg-opacity-80 rounded-full flex items-center justify-center mx-auto mb-2">
-                          <Clock className="w-6 h-6 text-blue-600" />
-                        </div>
-                        <span className="text-sm text-blue-700 font-medium">{relatedVideo.duration}</span>
-                      </div>
-                    </div>
-                    <div className="p-4">
-                      <h4 className="font-semibold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">{relatedVideo.title}</h4>
-                      <p className="text-sm text-gray-600">{relatedVideo.category}</p>
-                    </div>
-                  </div>
-                </Link>
-              ))
-            }
           </div>
         </div>
       </div>
