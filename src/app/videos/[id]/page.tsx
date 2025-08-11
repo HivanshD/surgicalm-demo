@@ -5,13 +5,14 @@ import videosData from '@/data/videos.json';
 import { notFound } from 'next/navigation';
 
 interface VideoDetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function VideoDetailPage({ params }: VideoDetailPageProps) {
-  const video = videosData.videos.find(v => v.id === params.id);
+export default async function VideoDetailPage({ params }: VideoDetailPageProps) {
+  const { id } = await params;
+  const video = videosData.videos.find(v => v.id === id);
 
   if (!video) {
     notFound();
